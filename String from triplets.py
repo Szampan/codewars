@@ -3,10 +3,6 @@ import copy
 def recoverSecret(triplets):
   chars = {c: [set(),set()] for col in triplets for c in col}
 
-  for t in triplets * len(chars):
-    print(t)
-  print()
-
   # Update chars dictionary based on triplets
 
   for triplet in triplets:
