@@ -1,17 +1,8 @@
 def encode(s):
     if s == '':
         return ('', None)
-    matrix = []
-    # for i in s:
-    #     matrix.append(s)
-    #     s = s[-1] + s[:-1]
+    matrix = sorted([s[i:] + s[:i] for i in reversed(range(len(s)))])
 
-    matrix = [s[i:] + s[:i] for i in reversed(range(len(s)))]
-
-    print(matrix)
-    # return
-
-    matrix.sort()
     ind = matrix.index(s)
     last_col = ''.join([i[-1] for i in matrix])    
     return (last_col, ind)
@@ -34,6 +25,3 @@ def decode(last_col, n):
         i = t[i]
 
     return decoded
-
-
-print(encode('bananabar'))
