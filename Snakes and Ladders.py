@@ -9,7 +9,8 @@ class SnakesLadders():
             return "Game over!"
         self.set_position(self.current_player, die1, die2)
         if self.has_won(self.current_player):
-            self.gameover()
+            return self.gameover()
+        
         tmp_player = self.current_player
         self.current_player = self.next_player(die1, die2)
         return f"Player {tmp_player} is on square {self.positions[tmp_player]}"
@@ -23,9 +24,9 @@ class SnakesLadders():
         
         square = self.positions[player] + die1 + die2
         if square > 100:
-            square = 100 - square
+            square = 100 - (square - 100)
 
-        for i in LADDERS+SNAKES:
+        for i in LADDERS + SNAKES:
             if square == i[0]:
                 square = i[1]
         return square       
@@ -35,19 +36,14 @@ class SnakesLadders():
             return True
         
     def next_player(self, die1, die2):
-        print(die1, die2)
         if die1 == die2:
-            print("SAME PLAYER AGAIN")
             return self.current_player
-        else:
-            print("NEXT PLAYER")
-            if self.current_player == 1:
-                return 2
-            return 1
+        return 2 if self.current_player == 1 else 1
         
     def gameover(self):
+        tmp_player = self.current_player
         self.current_player = 0
-        return f"Player {self.current_player+1} Wins!"
+        return f"Player {tmp_player} Wins!"
         
     def is_gameover(self):
         if self.current_player == 0:
